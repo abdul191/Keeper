@@ -1,44 +1,50 @@
 import React, { useState } from "react";
+import { MdAdd } from "react-icons/md";
+import Fab from '@mui/material/Fab';
 
 function CreateArea(props) {
   const [note, setNote] = useState({
     title: "",
-    content: "",
+    content: ""
   });
+
   function handleChange(event) {
     const { name, value } = event.target;
-    setNote((prevNote) => {
+
+    setNote(prevNote => {
       return {
         ...prevNote,
-        [name]: value,
+        [name]: value
       };
     });
   }
+
   function submitNote(event) {
     props.onAdd(note);
     setNote({
       title: "",
-      content: "",
+      content: ""
     });
     event.preventDefault();
   }
+
   return (
     <div>
-      <form>
+      <form className="create-note">
         <input
           name="title"
-          placeholder="Title"
           onChange={handleChange}
           value={note.title}
+          placeholder="Title"
         />
         <textarea
           name="content"
-          placeholder="Take a note... "
-          cols="30"
-          rows="10"
           onChange={handleChange}
-          value={note.content}></textarea>
-        <button onClick={submitNote}>Add</button>
+          value={note.content}
+          placeholder="Take a note..."
+          rows="3"
+        />
+        <Fab onClick={submitNote}><MdAdd/></Fab>
       </form>
     </div>
   );

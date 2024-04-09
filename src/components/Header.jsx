@@ -1,10 +1,11 @@
 import React from "react";
+import { IoMdFlashlight } from "react-icons/io";
 
 function Header() {
   return (
     <div>
       <header>
-        <h1>Keeper</h1>
+        <h1><IoMdFlashlight/>Keeper</h1>
       </header>
     </div>
   );
