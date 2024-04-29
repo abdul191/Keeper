@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { MdAdd } from "react-icons/md";
 import Fab from '@mui/material/Fab';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function CreateArea(props) {
   const [note, setNote] = useState({
@@ -18,13 +20,17 @@ function CreateArea(props) {
       };
     });
   }
-
+// use package toast for showing the error alert
   function submitNote(event) {
-    props.onAdd(note);
-    setNote({
-      title: "",
-      content: ""
-    });
+    if (!note.title.trim() || !note.content.trim()) {
+      toast.error("Please enter both title and text.");
+    } else {
+      props.onAdd(note);
+      setNote({
+        title: "",
+        content: ""
+      });
+    }
     event.preventDefault();
   }
 
@@ -46,6 +52,9 @@ function CreateArea(props) {
         />
         <Fab onClick={submitNote}><MdAdd/></Fab>
       </form>
+      {/* toast container  */}
+            <ToastContainer /> 
+
     </div>
   );
 }
